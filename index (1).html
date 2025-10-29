@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internify - AI-Powered Internship Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #1e40af 0%, #0f766e 50%, #ea580c 100%);
+        }
+        .glass-effect {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        .typing-animation {
+            overflow: hidden;
+            border-right: 2px solid #1e40af;
+            white-space: nowrap;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: #1e40af; }
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #1e40af, #0f766e);
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(30, 64, 175, 0.3);
+        }
+        .skill-bar {
+            transition: width 1s ease-in-out;
+        }
+        .chat-bubble {
+            animation: slideIn 0.3s ease-out;
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-gradient-to-r from-blue-600 to-teal-600 rounded-lg flex items-center justify-center">
+                                <span class="text-white font-bold text-lg">I</span>
+                            </div>
+                            <span class="ml-3 text-2xl font-bold bg-gradient-to-r from-blue-600 to-teal-600 bg-clip-text text-transparent">Internify</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#home" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">Home</a>
+                        <a href="#features" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">Features</a>
+                        <a href="#opportunities" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">Opportunities</a>
+                        <a href="#about" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">About</a>
+                        <a href="#contact" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">Contact</a>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="login-btn" class="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors">
+                        Login
+                    </button>
+                    <button id="register-btn" class="btn-primary text-white px-4 py-2 rounded-lg text-sm font-medium">
+                        Register
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="gradient-bg pt-20 pb-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+            <div class="text-center">
+                <h1 class="text-5xl md:text-6xl font-bold text-white mb-6">
+                    <span class="typing-animation">Welcome to Internify</span>
+                </h1>
+                <p class="text-xl text-white/90 mb-8 max-w-3xl mx-auto">
+                    India's most advanced AI-powered internship platform. Discover perfect opportunities, 
+                    optimize applications, and accelerate your career with intelligent matching and personalized guidance.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button id="get-started-btn" class="bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 rounded-lg text-lg font-semibold transition-all transform hover:scale-105">
+                        Get Started Today
+                    </button>
+                    <button id="explore-btn" class="bg-white/20 hover:bg-white/30 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-colors border border-white/30">
+                        Explore Features
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Floating Elements -->
+        <div class="absolute top-32 left-10 animate-float">
+            <div class="glass-effect rounded-full p-4">
+                <i data-lucide="brain" class="w-8 h-8 text-white"></i>
+            </div>
+        </div>
+        <div class="absolute top-48 right-20 animate-float" style="animation-delay: -2s;">
+            <div class="glass-effect rounded-full p-4">
+                <i data-lucide="target" class="w-8 h-8 text-white"></i>
+            </div>
+        </div>
+        <div class="absolute bottom-32 left-20 animate-float" style="animation-delay: -4s;">
+            <div class="glass-effect rounded-full p-4">
+                <i data-lucide="zap" class="w-8 h-8 text-white"></i>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">AI-Powered Features</h2>
+                <p class="text-xl text-gray-600">Advanced technology to transform your internship journey</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Smart Allocation Engine -->
+                <div class="card-hover bg-white rounded-xl p-8 shadow-lg border border-gray-100">
+                    <div class="bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg p-3 w-fit mb-6">
+                        <i data-lucide="cpu" class="w-8 h-8 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Smart Allocation Engine</h3>
+                    <p class="text-gray-600 mb-4">AI analyzes your profile, skills, and preferences to match you with perfect internship opportunities with 95% accuracy.</p>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li>• Intelligent skill matching</li>
+                        <li>• Location-based filtering</li>
+                        <li>• Career goal alignment</li>
+                    </ul>
+                </div>
+
+                <!-- Hyper-Personalized Matching -->
+                <div class="card-hover bg-white rounded-xl p-8 shadow-lg border border-gray-100">
+                    <div class="bg-gradient-to-r from-teal-500 to-teal-600 rounded-lg p-3 w-fit mb-6">
+                        <i data-lucide="target" class="w-8 h-8 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Hyper-Personalized Matching</h3>
+                    <p class="text-gray-600 mb-4">Advanced algorithms create unique opportunity recommendations tailored specifically to your career aspirations.</p>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li>• Behavioral analysis</li>
+                        <li>• Interest-based matching</li>
+                        <li>• Growth potential assessment</li>
+                    </ul>
+                </div>
+
+                <!-- AI Application Toolkit -->
+                <div class="card-hover bg-white rounded-xl p-8 shadow-lg border border-gray-100">
+                    <div class="bg-gradient-to-r from-purple-500 to-purple-600 rounded-lg p-3 w-fit mb-6">
+                        <i data-lucide="file-text" class="w-8 h-8 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">AI Application Toolkit</h3>
+                    <p class="text-gray-600 mb-4">Generate optimized resumes, compelling cover letters, and track application progress with AI-powered insights.</p>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li>• Resume optimization</li>
+                        <li>• Cover letter generation</li>
+                        <li>• Application tracking</li>
+                    </ul>
+                </div>
+
+                <!-- Interview Preparation Hub -->
+                <div class="card-hover bg-white rounded-xl p-8 shadow-lg border border-gray-100">
+                    <div class="bg-gradient-to-r from-orange-500 to-orange-600 rounded-lg p-3 w-fit mb-6">
+                        <i data-lucide="video" class="w-8 h-8 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Interview Preparation Hub</h3>
+                    <p class="text-gray-600 mb-4">Practice with AI-powered mock interviews, get personalized feedback, and master interview techniques.</p>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li>• Mock interview sessions</li>
+                        <li>• Real-time feedback</li>
+                        <li>• Performance analytics</li>
+                    </ul>
+                </div>
+
+                <!-- Skills Gap Analysis -->
+                <div class="card-hover bg-white rounded-xl p-8 shadow-lg border border-gray-100">
+                    <div class="bg-gradient-to-r from-green-500 to-green-600 rounded-lg p-3 w-fit mb-6">
+                        <i data-lucide="trending-up" class="w-8 h-8 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">Skills Gap Analysis</h3>
+                    <p class="text-gray-600 mb-4">Identify skill gaps, receive personalized learning recommendations, and track your professional development.</p>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li>• Skill assessment</li>
+                        <li>• Gap identification</li>
+                        <li>• Learning pathways</li>
+                    </ul>
+                </div>
+
+                <!-- AI Career Assistant -->
+                <div class="card-hover bg-white rounded-xl p-8 shadow-lg border border-gray-100">
+                    <div class="bg-gradient-to-r from-pink-500 to-pink-600 rounded-lg p-3 w-fit mb-6">
+                        <i data-lucide="message-circle" class="w-8 h-8 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-4">AI Career Assistant</h3>
+                    <p class="text-gray-600 mb-4">24/7 intelligent chatbot provides instant guidance, answers questions, and helps navigate your career journey.</p>
+                    <ul class="text-sm text-gray-500 space-y-2">
+                        <li>• Instant support</li>
+                        <li>• Career guidance</li>
+                        <li>• Smart recommendations</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Opportunities Section -->
+    <section id="opportunities" class="py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Featured Opportunities</h2>
+                <p class="text-xl text-gray-600">Discover top internship opportunities from leading companies</p>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="max-w-4xl mx-auto mb-12">
+                <div class="relative">
+                    <i data-lucide="search" class="absolute left-4 top-4 h-5 w-5 text-gray-400"></i>
+                    <input type="text" id="search-input" placeholder="Search internships by title, company, or skills..." 
+                           class="w-full pl-12 pr-4 py-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent text-lg">
+                    <button class="absolute right-2 top-2 btn-primary text-white px-6 py-2 rounded-lg">
+                        Search
+                    </button>
+                </div>
+            </div>
+
+            <!-- Opportunity Cards -->
+            <div id="opportunities-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Opportunity cards will be dynamically generated -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
+                <div class="card-hover p-6">
+                    <div class="text-4xl font-bold text-blue-600 mb-2" data-count="15000">0</div>
+                    <div class="text-gray-600">Active Internships</div>
+                </div>
+                <div class="card-hover p-6">
+                    <div class="text-4xl font-bold text-teal-600 mb-2" data-count="95">0</div>
+                    <div class="text-gray-600">Match Accuracy %</div>
+                </div>
+                <div class="card-hover p-6">
+                    <div class="text-4xl font-bold text-purple-600 mb-2" data-count="75000">0</div>
+                    <div class="text-gray-600">Students Helped</div>
+                </div>
+                <div class="card-hover p-6">
+                    <div class="text-4xl font-bold text-orange-600 mb-2" data-count="800">0</div>
+                    <div class="text-gray-600">Partner Companies</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">About Internify</h2>
+                <p class="text-xl text-gray-600">Transforming internship discovery with AI-powered technology</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6">Our Mission</h3>
+                    <p class="text-gray-600 mb-6">
+                        Internify is India's most advanced AI-powered internship platform, designed to bridge the gap between talented students and leading companies. We leverage cutting-edge artificial intelligence to provide personalized career guidance and opportunity matching.
+                    </p>
+                    <p class="text-gray-600 mb-6">
+                        Our platform serves over 75,000 students and partners with 800+ companies across India, maintaining a 95% match accuracy rate through our sophisticated AI algorithms.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="text-center p-4 bg-blue-50 rounded-lg">
+                            <div class="text-2xl font-bold text-blue-600">75K+</div>
+                            <div class="text-sm text-gray-600">Students Served</div>
+                        </div>
+                        <div class="text-center p-4 bg-green-50 rounded-lg">
+                            <div class="text-2xl font-bold text-green-600">800+</div>
+                            <div class="text-sm text-gray-600">Partner Companies</div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <img src="https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&fit=crop" 
+                         alt="Team collaboration" class="rounded-lg shadow-lg">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Get In Touch</h2>
+                <p class="text-xl text-gray-600">Have questions? We're here to help you succeed</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Contact Information -->
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6">Contact Information</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-center">
+                            <div class="bg-blue-100 p-3 rounded-lg">
+                                <i data-lucide="mail" class="w-6 h-6 text-blue-600"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="font-medium text-gray-900">Email</h4>
+                                <p class="text-gray-600">support@internify.in</p>
+                                <p class="text-gray-600">partnerships@internify.in</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center">
+                            <div class="bg-green-100 p-3 rounded-lg">
+                                <i data-lucide="phone" class="w-6 h-6 text-green-600"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="font-medium text-gray-900">Phone</h4>
+                                <p class="text-gray-600">+91 98765 43210</p>
+                                <p class="text-gray-600">+91 87654 32109</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center">
+                            <div class="bg-purple-100 p-3 rounded-lg">
+                                <i data-lucide="map-pin" class="w-6 h-6 text-purple-600"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="font-medium text-gray-900">Address</h4>
+                                <p class="text-gray-600">Internify Technologies Pvt. Ltd.</p>
+                                <p class="text-gray-600">Block A, Tech Park, Sector 62</p>
+                                <p class="text-gray-600">Noida, Uttar Pradesh 201309</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center">
+                            <div class="bg-orange-100 p-3 rounded-lg">
+                                <i data-lucide="clock" class="w-6 h-6 text-orange-600"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="font-medium text-gray-900">Business Hours</h4>
+                                <p class="text-gray-600">Monday - Friday: 9:00 AM - 6:00 PM</p>
+                                <p class="text-gray-600">Saturday: 10:00 AM - 4:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Social Media -->
+                    <div class="mt-8">
+                        <h4 class="font-medium text-gray-900 mb-4">Follow Us</h4>
+                        <div class="flex space-x-4">
+                            <a href="#" class="bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-lg transition-colors">
+                                <i data-lucide="linkedin" class="w-5 h-5"></i>
+                            </a>
+                            <a href="#" class="bg-blue-400 hover:bg-blue-500 text-white p-3 rounded-lg transition-colors">
+                                <i data-lucide="twitter" class="w-5 h-5"></i>
+                            </a>
+                            <a href="#" class="bg-blue-800 hover:bg-blue-900 text-white p-3 rounded-lg transition-colors">
+                                <i data-lucide="facebook" class="w-5 h-5"></i>
+                            </a>
+                            <a href="#" class="bg-pink-600 hover:bg-pink-700 text-white p-3 rounded-lg transition-colors">
+                                <i data-lucide="instagram" class="w-5 h-5"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6">Send us a Message</h3>=
+                    
+                    <form id="contact-form" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="contact-name" class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+                                <input type="text" id="contact-name" name="name" required
+                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            </div>
+                            <div>
+                                <label for="contact-email" class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                                <input type="email" id="contact-email" name="email" required
+                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="contact-phone" class="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
+                            <input type="tel" id="contact-phone" name="phone"
+                                   class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        </div>
+                        
+                        <div>
+                            <label for="contact-subject" class="block text-sm font-medium text-gray-700 mb-2">Subject</label>
+                            <select id="contact-subject" name="subject" required
+                                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                <option value="">Select a subject</option>
+                                <option value="general">General Inquiry</option>
+                                <option value="support">Technical Support</option>
+                                <option value="partnership">Partnership Opportunity</option>
+                                <option value="feedback">Feedback</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label for="contact-message" class="block text-sm font-medium text-gray-700 mb-2">Message</label>
+                            <textarea id="contact-message" name="message" rows="5" required
+                                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                      placeholder="Tell us how we can help you..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full btn-primary text-white py-3 rounded-lg font-medium">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-24 gradient-bg">
+        <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold text-white mb-6">Ready to Transform Your Career?</h2>
+            <p class="text-xl text-white/80 mb-8">
+                Join thousands of students who have found their dream internships through Internify's AI-powered platform.
+            </p>
+            <button id="cta-register-btn" class="bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 rounded-lg text-lg font-semibold transition-all transform hover:scale-105">
+                Start Your Journey Today
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <div class="flex items-center mb-4">
+                        <div class="w-8 h-8 bg-gradient-to-r from-blue-600 to-teal-600 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold">I</span>
+                        </div>
+                        <span class="ml-2 text-xl font-bold">Internify</span>
+                    </div>
+                    <p class="text-gray-400">AI-powered internship platform transforming careers across India.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Platform</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="opportunities.html" class="hover:text-white transition-colors">Find Internships</a></li>
+                        <li><a href="dashboard.html" class="hover:text-white transition-colors">AI Matching</a></li>
+                        <li><a href="dashboard.html" class="hover:text-white transition-colors">Skill Assessment</a></li>
+                        <li><a href="dashboard.html" class="hover:text-white transition-colors">Interview Prep</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Resources</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="dashboard.html" class="hover:text-white transition-colors">Career Guide</a></li>
+                        <li><a href="dashboard.html" class="hover:text-white transition-colors">Resume Builder</a></li>
+                        <li><a href="dashboard.html" class="hover:text-white transition-colors">Learning Paths</a></li>
+                        <li><a href="#about" class="hover:text-white transition-colors">Success Stories</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Support</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#contact" class="hover:text-white transition-colors">Help Center</a></li>
+                        <li><a href="#contact" class="hover:text-white transition-colors">Contact Us</a></li>
+                        <li><a href="#contact" class="hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="#contact" class="hover:text-white transition-colors">Terms of Service</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 Internify. All rights reserved. Powered by AI for the future of internships.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="login-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white rounded-xl shadow-2xl max-w-md w-full p-8 relative">
+                <button id="close-login-modal" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+                
+                <div class="text-center mb-6">
+                    <div class="w-16 h-16 bg-gradient-to-r from-blue-600 to-teal-600 rounded-xl flex items-center justify-center mx-auto mb-4">
+                        <span class="text-white font-bold text-xl">I</span>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-900">Welcome Back</h2>
+                    <p class="text-gray-600">Sign in to your Internify account</p>
+                </div>
+
+                <form id="login-form" class="space-y-4">
+                    <div>
+                        <input type="email" id="login-email" placeholder="Email Address" required
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+                    <div>
+                        <input type="password" id="login-password" placeholder="Password" required
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+                    <button type="submit" class="w-full btn-primary text-white py-3 rounded-lg font-medium">
+                        Sign In
+                    </button>
+                </form>
+
+                <div class="mt-6 text-center">
+                    <p class="text-gray-600">
+                        Don't have an account? 
+                        <button id="switch-to-register" class="text-blue-600 hover:text-blue-700 font-medium">Register here</button>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="register-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white rounded-xl shadow-2xl max-w-md w-full p-8 relative">
+                <button id="close-register-modal" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+                
+                <div class="text-center mb-6">
+                    <div class="w-16 h-16 bg-gradient-to-r from-blue-600 to-teal-600 rounded-xl flex items-center justify-center mx-auto mb-4">
+                        <span class="text-white font-bold text-xl">I</span>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-900">Join Internify</h2>
+                    <p class="text-gray-600">Create your account and start your journey</p>
+                </div>
+
+                <form id="register-form" class="space-y-4">
+                    <div>
+                        <input type="text" id="register-fullname" placeholder="Full Name" required
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+                    <div>
+                        <input type="email" id="register-email" placeholder="Email Address" required
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+                    <div>
+                        <select id="register-education" required
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <option value="">Select Education Level</option>
+                            <option value="undergraduate">Undergraduate</option>
+                            <option value="postgraduate">Postgraduate</option>
+                            <option value="diploma">Diploma</option>
+                            <option value="phd">PhD</option>
+                        </select>
+                    </div>
+                    <div>
+                        <input type="text" id="register-location" placeholder="Location (City, State)" required
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+                    <div>
+                        <input type="password" id="register-password" placeholder="Password" required
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+                    <button type="submit" class="w-full btn-primary text-white py-3 rounded-lg font-medium">
+                        Create Account
+                    </button>
+                </form>
+
+                <div class="mt-6 text-center">
+                    <p class="text-gray-600">
+                        Already have an account? 
+                        <button id="switch-to-login" class="text-blue-600 hover:text-blue-700 font-medium">Sign in</button>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard (Hidden by default) -->
+    <div id="dashboard" class="hidden min-h-screen bg-gray-50 pt-16">
+        <!-- Dashboard content will be loaded here -->
+    </div>
+
+    <!-- AI Chatbot -->
+    <div id="chatbot-container" class="fixed bottom-4 right-4 z-40">
+        <!-- Chatbot Toggle Button -->
+        <button id="chatbot-toggle" class="bg-gradient-to-r from-blue-600 to-teal-600 hover:from-blue-700 hover:to-teal-700 text-white p-4 rounded-full shadow-lg transition-all transform hover:scale-110">
+            <i data-lucide="message-circle" class="w-6 h-6"></i>
+        </button>
+
+        <!-- Chatbot Window -->
+        <div id="chatbot-window" class="hidden absolute bottom-16 right-0 w-96 h-96 bg-white rounded-lg shadow-2xl border border-gray-200 flex flex-col">
+            <!-- Header -->
+            <div class="flex items-center justify-between p-4 bg-gradient-to-r from-blue-600 to-teal-600 text-white rounded-t-lg">
+                <div class="flex items-center">
+                    <i data-lucide="bot" class="w-5 h-5 mr-2"></i>
+                    <span class="font-medium">Internify AI Assistant</span>
+                </div>
+                <button id="chatbot-close" class="text-white hover:text-gray-200">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <!-- Messages -->
+            <div id="chatbot-messages" class="flex-1 overflow-y-auto p-4 space-y-4">
+                <div class="chat-bubble flex">
+                    <div class="bg-blue-500 text-white p-3 rounded-lg max-w-xs">
+                        <p class="text-sm">Hi! I'm your AI career assistant. I can help you find internships, prepare for interviews, and guide your career journey. What would you like to explore today?</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input -->
+            <div class="p-4 border-t border-gray-200">
+                <div class="flex items-center space-x-2">
+                    <input type="text" id="chatbot-input" placeholder="Ask me anything..." 
+                           class="flex-1 border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <button id="chatbot-send" class="bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-lg">
+                        <i data-lucide="send" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
